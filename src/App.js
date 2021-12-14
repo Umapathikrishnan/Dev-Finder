@@ -9,18 +9,18 @@ import LanguageIcon from '@material-ui/icons/Language';
 export default function App() {
   const [username, setUsername] = useState('');
   const [user, setUser] = useState([]);
-  //try last
+
   useEffect(() => {
-    fetchdata();
-  }, []);
-  //starting render
+    fetchdata(); // useeffect will call this function onload
+  }, []); // empty array [] denotes every function inside useeffect will run once
+
   const fetchdata = async () => {
     const res = await axios.get(`https://api.github.com/users/google`);
     setUser(res.data);
     //console.log(res.data);
   };
-  const handleSubmit = async e => {
-    e.preventDefault(); //without this it will refresh
+  const handleSubmit = async (e) => {
+    e.preventDefault(); //without this webpage will refresh
     const res = await axios.get(`https://api.github.com/users/${username}`);
     await setUser(res.data);
     set;
@@ -35,7 +35,7 @@ export default function App() {
           type="text"
           placeholder="Search Github username..."
           value={username}
-          onChange={event => setUsername(event.target.value)}
+          onChange={(event) => setUsername(event.target.value)}
         />
         <button className="search-btn" type="submit">
           Search
